@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "container:"
+      name = "Supporting Files">
+      <Group
+         location = "container:"
+         name = "Images">
+         <FileRef
+            location = "group:Circle Chat/Images/edit profile.png">
+         </FileRef>
+         <FileRef
+            location = "group:Circle Chat/Images/john wick profile.png">
+         </FileRef>
+         <FileRef
+            location = "group:Circle Chat/Images/login.png">
+         </FileRef>
+         <FileRef
+            location = "group:Circle Chat/Images/map.png">
+         </FileRef>
+         <FileRef
+            location = "group:Circle Chat/Images/message pic.png">
+         </FileRef>
+         <FileRef
+            location = "group:Circle Chat/Images/place circle.png">
+         </FileRef>
+         <FileRef
+            location = "group:Circle Chat/Images/save profile.png">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:silhouette.png">
+      </FileRef>
+      <Group
+         location = "container:"
+         name = "Pin Icons">
+         <FileRef
+            location = "group:select black.png">
+         </FileRef>
+         <FileRef
+            location = "group:select blue.png">
+         </FileRef>
+         <FileRef
+            location = "group:radius.png">
+         </FileRef>
+         <FileRef
+            location = "group:select red.png">
+         </FileRef>
+         <FileRef
+            location = "group:select green.png">
+         </FileRef>
+         <FileRef
+            location = "group:select orange.png">
+         </FileRef>
+         <FileRef
+            location = "group:select purple.png">
+         </FileRef>
+         <FileRef
+            location = "group:select yellow.png">
+         </FileRef>
+         <FileRef
+            location = "group:pin black.png">
+         </FileRef>
+         <FileRef
+            location = "group:pin green.png">
+         </FileRef>
+         <FileRef
+            location = "group:pin orange.png">
+         </FileRef>
+         <FileRef
+            location = "group:pin purple.png">
+         </FileRef>
+         <FileRef
+            location = "group:pin red.png">
+         </FileRef>
+         <FileRef
+            location = "group:pin yellow.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../pin blue.png">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:../../pin blue.png">
+      </FileRef>
+      <FileRef
+         location = "group:check icon.png">
+      </FileRef>
+      <FileRef
+         location = "group:../../../Downloads/cancel icon.png">
+      </FileRef>
+      <FileRef
+         location = "group:../../../Downloads/notifications bell.png">
+      </FileRef>
+      <FileRef
+         location = "group:messages notif.png">
+      </FileRef>
+      <FileRef
+         location = "group:../../../Downloads/addImage.png">
+      </FileRef>
+      <FileRef
+         location = "group:../../../Downloads/gears.png">
+      </FileRef>
+      <FileRef
+         location = "group:../../../Downloads/selected.png">
+      </FileRef>
+      <FileRef
+         location = "group:../../../Downloads/options.png">
+      </FileRef>
+      <FileRef
+         location = "group:gears white.png">
+      </FileRef>
+      <FileRef
+         location = "group:../../../Downloads/message.png">
+      </FileRef>
+      <FileRef
+         location = "group:plus white.png">
+      </FileRef>
+      <FileRef
+         location = "group:plus blue.png">
+      </FileRef>
+      <FileRef
+         location = "group:/Users/daltonteague/Documents/IOS Projects/Circle Chat/city-image.jpg">
+      </FileRef>
+      <FileRef
+         location = "group:plus.png">
+      </FileRef>
+      <FileRef
+         location = "group:/Users/daltonteague/Documents/IOS Projects/Circle Chat/circles grid.jpg">
+      </FileRef>
+      <Group
+         location = "group:star_jedi"
+         name = "star_jedi">
+         <Group
+            location = "group:stjedise"
+            name = "stjedise">
+            <FileRef
+               location = "group:stjedise sample.jpg">
+            </FileRef>
+            <FileRef
+               location = "group:STJEDISE.TTF">
+            </FileRef>
+            <FileRef
+               location = "group:StarJedi Special Edition font guide Word97.doc">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:stjelogo"
+            name = "stjelogo">
+            <FileRef
+               location = "group:Strjmono.ttf">
+            </FileRef>
+            <FileRef
+               location = "group:logomonoline samples.jpg">
+            </FileRef>
+            <FileRef
+               location = "group:Stjldbl2.ttf">
+            </FileRef>
+            <FileRef
+               location = "group:Stjldbl1.ttf">
+            </FileRef>
+            <FileRef
+               location = "group:Star Jedi Logo font guide Word97.doc">
+            </FileRef>
+            <FileRef
+               location = "group:logodoubleline samples.jpg">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:starjedi"
+            name = "starjedi">
+            <FileRef
+               location = "group:Star Jedi font guide Word97.doc">
+            </FileRef>
+            <FileRef
+               location = "group:starjedi hollow sample.jpg">
+            </FileRef>
+            <FileRef
+               location = "group:Starjhol.ttf">
+            </FileRef>
+            <FileRef
+               location = "group:starjedi sample.jpg">
+            </FileRef>
+            <FileRef
+               location = "group:sample003.jpg">
+            </FileRef>
+            <FileRef
+               location = "group:Starjedi.ttf">
+            </FileRef>
+         </Group>
+         <Group
+            location = "group:starjout"
+            name = "starjout">
+            <FileRef
+               location = "group:Star Jedi Outline font guide Word97.doc">
+            </FileRef>
+            <FileRef
+               location = "group:Starjout.ttf">
+            </FileRef>
+            <FileRef
+               location = "group:Star Jedi Outline sample.jpg">
+            </FileRef>
+         </Group>
+      </Group>
+      <Group
+         location = "group:typo_hoop"
+         name = "typo_hoop">
+         <FileRef
+            location = "group:Typo Hoop_Regular_Demo.otf">
+         </FileRef>
+         <FileRef
+            location = "group:Typo Hoop_800.png">
+         </FileRef>
+         <FileRef
+            location = "group:Read_Me_First.txt">
+         </FileRef>
+         <FileRef
+            location = "group:Typo Hoop_Hairline Demo.otf">
+         </FileRef>
+         <FileRef
+            location = "group:Typo Hoop_Bold Demo.otf">
+         </FileRef>
+         <FileRef
+            location = "group:Typo Hoop_Light Demo.otf">
+         </FileRef>
+      </Group>
+   </Group>
+   <FileRef
+      location = "group:Circle Chat.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>
