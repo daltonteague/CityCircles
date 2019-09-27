@@ -52,6 +52,8 @@
 		2AE0BABE20D343BB001ED967 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE0BABD20D343BB001ED967 /* Constants.swift */; };
 		2AE0BABF20D343BB001ED967 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE0BABD20D343BB001ED967 /* Constants.swift */; };
 		2AE0BACA20D4107C001ED967 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE0BAC920D4107C001ED967 /* MapViewController.swift */; };
+		2AEB24E3232D4F28003C992F /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEB24E2232D4F28003C992F /* ImageController.swift */; };
+		2AF18C8E232C2D7F0048C7C7 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF18C8D232C2D7F0048C7C7 /* InitialViewController.swift */; };
 		5A8A2D823CE9F2112EE0162F /* Pods_Circle_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F2A5A46C0F00DBF4936ACB3 /* Pods_Circle_Chat.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +109,8 @@
 		2AE0BAB920D33043001ED967 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		2AE0BABD20D343BB001ED967 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2AE0BAC920D4107C001ED967 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		2AEB24E2232D4F28003C992F /* ImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
+		2AF18C8D232C2D7F0048C7C7 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		4F2A5A46C0F00DBF4936ACB3 /* Pods_Circle_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Circle_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E7BE7B229EE66A25DC7567A /* Pods-Circle ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Circle ChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Circle ChatTests/Pods-Circle ChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		A52B919A043B8EDA3576F01F /* Pods_Circle_ChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Circle_ChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				2AAD264022E89D6600A4DAFC /* NavigationController.swift */,
+				2AF18C8D232C2D7F0048C7C7 /* InitialViewController.swift */,
 				2A1087F922DFCE8B00EC2696 /* Channel.swift */,
 				2A1087FA22DFCE8B00EC2696 /* Message.swift */,
 				2AB8784822FA401B0065EBDC /* DirectMessage.swift */,
@@ -221,6 +226,7 @@
 				2A8B84FA211786EF0021A009 /* ProfileViewController.swift */,
 				2A6873A922C02B6900B17D34 /* CreateCircleViewController.swift */,
 				2A886BAD22F13E2400391DAE /* EditCircleViewController.swift */,
+				2AEB24E2232D4F28003C992F /* ImageController.swift */,
 				2A21D04822E66C1C003A81D5 /* CustomMessageCell.swift */,
 				2ACFFE6D22CA4AC8005C1C21 /* PreviewCircleViewController.swift */,
 				2A52FBCD22B033C100FD116C /* SignupViewController.swift */,
@@ -467,7 +473,9 @@
 				2A1087FD22DFCE8B00EC2696 /* Message.swift in Sources */,
 				2A50D93422EBBAE600129324 /* SettingsViewController.swift in Sources */,
 				2A975D1E20D32B8500BAE22B /* AppDelegate.swift in Sources */,
+				2AF18C8E232C2D7F0048C7C7 /* InitialViewController.swift in Sources */,
 				2AE0BABE20D343BB001ED967 /* Constants.swift in Sources */,
+				2AEB24E3232D4F28003C992F /* ImageController.swift in Sources */,
 				2AE0BACA20D4107C001ED967 /* MapViewController.swift in Sources */,
 				2A886BAE22F13E2400391DAE /* EditCircleViewController.swift in Sources */,
 				2AAD264722E9516800A4DAFC /* AppSettings.swift in Sources */,

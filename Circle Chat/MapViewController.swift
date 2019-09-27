@@ -25,7 +25,11 @@ struct Circle {
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    
+    /**
+     These interface connectors are used to set the
+     color of the circle being set. They will also change the
+     color of the pin being displayed.
+    */
     @IBAction func redButton(_ sender: Any) {
         placementMarker.image = UIImage(named: "pin red.png")
         clearButtonBackgrounds()
@@ -69,7 +73,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     @IBOutlet weak var blueButtonView: UIButton!
     @IBOutlet weak var purpleButtonView: UIButton!
     
-    
+    /**
+     These interface connectors change the size of the
+     circle being created, as well as the display
+     of the example circle while the circle is being placed.
+    */
     @IBAction func smallButton(_ sender: Any) {
         showCircleRadius()
         createCircleRadius = "small"
@@ -128,27 +136,49 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         openPreview()
     }
     
+    //Used to keep track of the user profile selected
     var selectedUser: String! = ""
+    
+    //Keeps track of the current circle settings, has default values
+    //of blue and medium
     var createCircleColor: String! = "blue"
     var createCircleRadius: String! = "medium"
+    
+    //Gets the coordinates of the current center when making a circle
     var center: CLLocationCoordinate2D!
+    
+    //Used to show a preview of the circle radius
     var overlayPreview: MKCircle!
+    
+    //Used to keep track of the original toolbar height
+    //so it can be returned here after animation
+    var originalBarHeight: CGFloat!
     
     var locationManager = CLLocationManager()
     let regionRadius: CLLocationDistance = 1000
     var lastUserLocation: CLLocation!
     var selectedAnnotation: MKPointAnnotation?
     
+    //Flag used when map contents need to be reloaded
     var reinstantiate: Bool = false
+    
+    //Flag used when the user is currently selecting map location
     var placingMarker: Bool = false
+    var initialSet: Bool = true
     var prevSelected: MKPointAnnotation?
     
+    //Used to keep track of the events and their corresponding
+    //chat channels
     var numEvents: Int!
     var circlesArr = [Circle]()
     var channels: [Channel] = []
     
+    //The reference for the Firebase database
     let databaseRef = Database.database().reference(fromURL: "https://circle-chat-3cee4.firebaseio.com/")
     
+    /**
+     Initializes the location authorizations and various variables
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -171,6 +201,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             locationManager.startUpdatingLocation()
         }
         
+        //If there are events available in the area,
+        //prepare the circle list table to receive data
         if (circlesArr.count > 0) {
             circleList.dataSource = self
             circleList.delegate = self
@@ -178,7 +210,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         mapView.showsUserLocation = true
         mapView.showAnnotations(self.mapView.annotations, animated: true)
+        initialSet = true
         
+        //Zoom to user location
+        if let userLocation = locationManager.location?.coordinate {
+            let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 200, longitudinalMeters: 200)
+            mapView.setRegion(viewRegion, animated: true)
+            print("Map set to user location")
+        }
+        
+        placementMarker.layer.shadowColor = UIColor.black.cgColor
+        placementMarker.layer.shadowOpacity = 0.1
+        placementMarker.layer.shadowOffset = CGSize(width: 0.1, height: 0.1)
+        placementMarker.layer.shadowRadius = 5
         placementMarker.isHidden = true;
         mediumButtonView.setBackgroundImage(UIImage(named: "selected.png"), for: .normal)
         blueButtonView.setBackgroundImage(UIImage(named: "selected.png"), for: .normal)
@@ -186,6 +230,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
     }
     
+    /**
+     Loads the array of circles with data from firebase.
+    */
     override func viewWillAppear(_ animated: Bool) {
         print("map view appears")
         
@@ -235,16 +282,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
+    //Transitions to a user profile view
     func visitProfile() {
         self.performSegue(withIdentifier: "userProfile", sender: self)
     }
     
+    //Transitions to a preview of a circle
     func openPreview() {
         if (selectedAnnotation != nil) {
             self.performSegue(withIdentifier: "previewCircle", sender: self)
         }
     }
     
+    //Animates the buttons off the screen
     func hideButtons() {
         
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseOut, animations: {
@@ -262,6 +312,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         })
     }
     
+    /*
+     Function to determine the current location authorization status.
+     Updates the displayed events on status change
+    */
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         print("prefilling")
         switch(CLLocationManager.authorizationStatus()) {
@@ -275,6 +329,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         fillArray()
     }
     
+    /*
+     Function to add events in the database to the
+     map as overlays. Starts by taking a snapshot of the current
+     circle data and then adds each circle to the map as well
+     as the list of circles for the user to scroll through.
+     */
     func fillArray() {
         
         if (circlesArr.count > 0) {
@@ -282,7 +342,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             circleList.delegate = self
         }
         
-        print("filling")
+        print("filling: ", circlesArr.count, " events found"
+        )
         databaseRef.child("circle").observeSingleEvent(of: .value) { snapshot in
             let enumerator = snapshot.children
             self.lastUserLocation = self.locationManager.location
@@ -294,7 +355,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 print("lat and lon", lat, lon)
                 let eventLoc = CLLocation(latitude: lat, longitude: lon)
                 print("Distance from current location: ", eventLoc.distance(from: self.lastUserLocation))
-                if (eventLoc.distance(from: self.lastUserLocation) <= 2000) {
+                if (eventLoc.distance(from: self.lastUserLocation) <= 200000) {
                     
                     let radius: Double
                     let size = event["radius"] as? String
@@ -313,6 +374,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                     }
                     
                     let eventCircle = MKCircle.init(center: eventLoc.coordinate, radius: radius as CLLocationDistance)
+                    eventCircle.title = event["name"] as? String
                     
                     let annotation = MKPointAnnotation.init()
                     annotation.coordinate = CLLocationCoordinate2DMake(lat, lon)
@@ -338,8 +400,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
+    /**
+     *  Map view function called for each annotation that must
+     *  be set.
+     **/
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        print("got to viewForAnnotatin")
+        //print("Annotation ", annotation.title, " is color: ", annotation.subtitle)
+        
         if annotation is MKUserLocation {
             return nil
         }
@@ -347,43 +414,52 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         let identifier = "MyCustomAnnotation"
         
+        //Set the annotationView we want to customize
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = false
             
-            switch(color) {
-            case "red":
-                annotationView!.image = UIImage(named: "pin red.png")
-                break;
-            case "blue":
-                annotationView!.image = UIImage(named: "pin blue.png")
-                break;
-            case "black":
-                annotationView!.image = UIImage(named: "pin black.png")
-                break;
-            case "green":
-                annotationView!.image = UIImage(named: "pin green.png")
-                break;
-            case "yellow":
-                annotationView!.image = UIImage(named: "pin yellow.png")
-                break;
-            case "orange":
-                annotationView!.image = UIImage(named: "pin orange.png")
-                break;
-            case "purple":
-                annotationView!.image = UIImage(named: "pin purple.png")
-                break;
-            default:
-                annotationView!.image = UIImage(named: "pin blue.png")
-                break;
-            }
-            
-            annotationView?.centerOffset = CGPoint(x: 0, y: -(annotationView?.image?.size.height)! / 2)
-            
         } else {
             annotationView!.annotation = annotation
         }
+        
+        
+        annotationView!.layer.shadowColor = UIColor.black.cgColor
+        annotationView!.layer.shadowOpacity = 0.1
+        annotationView!.layer.shadowOffset = CGSize(width: 0.1, height: 0.1)
+        annotationView!.layer.shadowRadius = 5
+        
+        switch(color) {
+        case "red":
+            annotationView!.image = UIImage(named: "pin red.png")
+            break;
+        case "blue":
+            annotationView!.image = UIImage(named: "pin blue.png")
+            break;
+        case "black":
+            annotationView!.image = UIImage(named: "pin black.png")
+            break;
+        case "green":
+            annotationView!.image = UIImage(named: "pin green.png")
+            break;
+        case "yellow":
+            annotationView!.image = UIImage(named: "pin yellow.png")
+            break;
+        case "orange":
+            annotationView!.image = UIImage(named: "pin orange.png")
+            break;
+        case "purple":
+            annotationView!.image = UIImage(named: "pin purple.png")
+            break;
+        default:
+            annotationView!.image = UIImage(named: "pin blue.png")
+            break;
+        }
+        
+        //Adjust the annotation bottom position to be centered on the circle
+        annotationView?.centerOffset = CGPoint(x: 0, y: -(annotationView?.image?.size.height)! / 2 + 4)
+           
         
         return annotationView
     }
@@ -417,16 +493,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             var toolBarFrame = self.toolBarView.frame
             var circleListFrame = self.circleList.frame
             var mapFrame = self.mapView.frame
-            circleListFrame.origin.y += 220
-            toolBarFrame.origin.y += 220
-            mapFrame.size.height += 300
-            mapFrame.origin.y += 30
-            self.placementMarker.frame.origin.y += 350
-            self.createCircleButtonView.frame.origin.y += 220
-            self.optionsButtonView.frame.origin.y += 220
+            
+            self.originalBarHeight = toolBarFrame.origin.y
+            
+            // While still visible, animate lower bar downward
+            circleListFrame.origin.y += self.view.frame.height / 6
+            toolBarFrame.origin.y += self.view.frame.height / 6
+            mapFrame.size.height += self.view.frame.height / 6
+            self.createCircleButtonView.frame.origin.y += self.view.frame.height / 6
+            self.optionsButtonView.frame.origin.y += self.view.frame.height / 6
+            
             self.toolBarView.frame = toolBarFrame
             self.circleList.frame = circleListFrame
             self.mapView.frame = mapFrame
+            
+            
+            self.placementMarker.frame.origin.y += self.view.frame.height / 2.5
+            
+            //Animate buttons onto screen
             self.redButtonView.frame.origin.x += 150
             self.orangeButtonView.frame.origin.x += 150
             self.yellowButtonView.frame.origin.x += 150
@@ -436,8 +520,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.smallButtonView.frame.origin.x -= 150
             self.mediumButtonView.frame.origin.x -= 150
             self.largeButtonView.frame.origin.x -= 150
+            
         }, completion: { finished in
             print("Moved list!")
+            //Necessary to override the AutoLayout constraints of these views
             self.view.translatesAutoresizingMaskIntoConstraints = true
             self.toolBarView.translatesAutoresizingMaskIntoConstraints = true
             self.circleList.translatesAutoresizingMaskIntoConstraints = true
@@ -469,16 +555,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             var toolBarFrame = self.toolBarView.frame
             var circleListFrame = self.circleList.frame
             var mapFrame = self.mapView.frame
-            circleListFrame.origin.y -= 220
-            toolBarFrame.origin.y -= 220
-            mapFrame.size.height -= 300
-            mapFrame.origin.y -= 30
-            self.placementMarker.frame.origin.y -= 350
-            self.createCircleButtonView.frame.origin.y -= 220
-            self.optionsButtonView.frame.origin.y -= 220
+            
+            //Animate the toolbar items back to original location
+            circleListFrame.origin.y -= self.view.frame.height / 6
+            toolBarFrame.origin.y -= self.view.frame.height / 6
+            mapFrame.size.height -= self.view.frame.height / 6
+            self.createCircleButtonView.frame.origin.y -= self.view.frame.height / 6
+            self.optionsButtonView.frame.origin.y -= self.view.frame.height / 6
+            
             self.toolBarView.frame = toolBarFrame
             self.circleList.frame = circleListFrame
             self.mapView.frame = mapFrame
+            
+            //Move placement marker to center of screen
+            self.placementMarker.frame.origin.y -= self.view.frame.height / 2.5
+            
+            //Animated buttons out of view
             self.redButtonView.frame.origin.x -= 150
             self.orangeButtonView.frame.origin.x -= 150
             self.yellowButtonView.frame.origin.x -= 150
@@ -490,6 +582,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             self.largeButtonView.frame.origin.x += 150
         }, completion: { finished in
             print("Moved list!")
+            //Again, necessary to override AutoLayout constraints
             self.view.translatesAutoresizingMaskIntoConstraints = true
             self.toolBarView.translatesAutoresizingMaskIntoConstraints = true
             self.circleList.translatesAutoresizingMaskIntoConstraints = true
@@ -614,7 +707,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
-        self.mapView.setRegion(region, animated: true)
+        //self.mapView.setRegion(region, animated: true)
         //addRadiusCircle(location: location)
     }
     
@@ -699,16 +792,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 }
             }
             
-            //let previewCircle = (storyboard?.instantiateViewController(withIdentifier: "preview"))! as! PreviewCircleViewController
-            //present(previewCircle, animated: true, completion: nil)
-            //self.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             self.performSegue(withIdentifier: "previewCircle", sender: self)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        print("segue bitch into ", segue.identifier as Any)
+        print("segue into ", segue.identifier as Any)
         if segue.identifier == "previewCircle"
         {
             let vc = segue.destination as? PreviewCircleViewController
@@ -716,7 +806,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             for i in (0 ..< circlesArr.count) {
                 print("compare ", self.selectedAnnotation?.title as Any, " with ", circlesArr[i].name)
                 if (self.selectedAnnotation?.title == circlesArr[i].name) {
-                    print("setting them bitches")
+                    print("Setting preview values")
                     vc?.circleNameString = circlesArr[i].name
                     vc?.circleDescString = circlesArr[i].desc
                     vc?.circleDateString = circlesArr[i].endDate

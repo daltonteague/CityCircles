@@ -509,7 +509,7 @@ extension ChatViewController: MessagesLayoutDelegate {
         if isFromCurrentSender(message: message) {
             return !isPreviousMessageSameSender(at: indexPath) ? 20 : 0
         } else {
-            return !isPreviousMessageSameSender(at: indexPath) ? (20 + outgoingAvatarOverlap) : 0
+            return !isPreviousMessageSameSender(at: indexPath) ? (20) : 0
         }
     }
     

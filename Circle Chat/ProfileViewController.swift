@@ -113,6 +113,12 @@ UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate{
     }
     
     //functions
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.profileImageView.layer.cornerRadius = min(self.profileImageView.frame.size.width, self.profileImageView.frame.size.height) / 2
+        self.profileImageView.clipsToBounds = true
+    }
+    
     
     //Pulls user data from firebase and links it to the storyboard UI elements
     func setupProfile() {
@@ -120,8 +126,8 @@ UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate{
         if Auth.auth().currentUser?.uid == nil {
             logout()
         } else {
-            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
-            self.profileImageView.clipsToBounds = true;
+//            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+//            self.profileImageView.clipsToBounds = true;
             
             if let uid = Auth.auth().currentUser?.uid {
                 databaseRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot)
@@ -181,9 +187,19 @@ UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate{
         
         unsavedChangesAlert()
         
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let loginViewController = storyboard.instantiateViewController(withIdentifier: "login")
-//        present(loginViewController, animated: true, completion: nil)
+        do {
+            try Auth.auth().signOut()
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginViewController = storyboard.instantiateViewController(withIdentifier: "login") as! LoginViewController
+            UIApplication.shared.keyWindow?.rootViewController = loginViewController
+            UIApplication.shared.keyWindow?.makeKeyAndVisible()
+            //present(loginViewController, animated: true, completion: nil)
+        } catch {
+            print("Exception thrown while logging out.")
+        }
+        
+        
         self.performSegue(withIdentifier: "logout", sender: self)
     }
     
@@ -263,7 +279,12 @@ UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate{
         let imageName = NSUUID().uuidString
         let storedImage = storageRef.child("profile_images").child(imageName)
         
-        if let uploadData = self.profileImageView.image!.pngData() {
+        let reducedImg = self.profileImageView.image?.resizeWithWidth(width: 100)
+        let compressData = reducedImg?.pngData()!
+        //max value is 1.0 and minimum is 0.0
+        //let compressedImage = UIImage(data: compressData!)
+        
+        if let uploadData = compressData {
             storedImage.putData(uploadData, metadata: nil) { (metadata, error) in
                 if error != nil {
                     print(error!)

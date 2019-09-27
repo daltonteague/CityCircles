@@ -13,7 +13,7 @@ import CoreLocation
 import Firebase
 import FirebaseFirestore
 
-class EditCircleViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditCircleViewController: UIViewController, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     var circleNameString: String! = ""
     var circleDescString: String! = ""
@@ -121,7 +121,9 @@ class EditCircleViewController: UIViewController, CLLocationManagerDelegate, UII
         }
         
         eventName.text = circleNameString
+        eventName.delegate = self
         eventDescription.text = circleDescString
+        eventDescription.delegate = self
         endDate.date = timestamp.dateValue()
         originalName = circleNameString
         originalDesc = circleDescString
@@ -324,7 +326,10 @@ class EditCircleViewController: UIViewController, CLLocationManagerDelegate, UII
         let imageName = NSUUID().uuidString
         let storedImage = storageRef.child("profile_images").child(imageName)
         
-        if let uploadData = self.circleImageView.image!.pngData() {
+        let reducedImg = self.circleImage.resizeWithWidth(width: 125)
+        let compressData = reducedImg?.pngData()!
+        
+        if let uploadData = compressData {
             storedImage.putData(uploadData, metadata: nil) { (metadata, error) in
                 if error != nil {
                     print(error!)
@@ -398,6 +403,12 @@ class EditCircleViewController: UIViewController, CLLocationManagerDelegate, UII
     fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
         return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
     }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
 }
 
 extension EditCircleViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -416,5 +427,6 @@ extension EditCircleViewController: UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return dataSource[row]
     }
+    
     
 }

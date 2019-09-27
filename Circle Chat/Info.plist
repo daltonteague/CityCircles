@@ -2,14 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Share photos</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>City Circles needs your location to find circles in your area.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>City Circles needs your location to find circles in your area.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>City Circles</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -26,6 +22,17 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>City Circles needs your location to find circles in your area.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>City Circles needs your location to find circles in your area.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Share photos</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Typo Hoop_Regular_Demo.otf</string>
+		<string>Starjout.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -39,11 +46,6 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Typo Hoop_Regular_Demo.otf</string>
-		<string>Starjout.ttf</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

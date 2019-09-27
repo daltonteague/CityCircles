@@ -12,18 +12,31 @@ import MapKit
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIViewController,  UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = NavigationController(rootViewController: LoginViewController())
-//         window?.makeKeyAndVisible()
+        //If user is already signed in, go straight to map view
+        if Auth.auth().currentUser != nil {
+            print("User already logged in!")
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let mapvc = storyBoard.instantiateViewController(withIdentifier: "mapIdentifier") as! MapViewController
+            
+//            let rootViewController = self.window!.rootViewController as! LoginViewController
+//            rootViewController.performSegue(withIdentifier: "mapIdentifier", sender: nil)
+            
+            window?.rootViewController = mapvc
+            window?.makeKeyAndVisible()
+            
+        } else {
+            print("User must log in")
+        }
+        
         registerForPushNotifications()
     
         return true

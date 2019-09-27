@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     //variabls
     var databaseRef : DatabaseReference! = nil
@@ -26,8 +26,18 @@ class LoginViewController: UIViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         databaseRef = Database.database().reference(fromURL: "https://circle-chat-3cee4.firebaseio.com/")
+        
+        //Specify an email keyboard for the email login
+        self.username.delegate = self
+        self.username.keyboardType = UIKeyboardType.emailAddress
+        self.password.delegate = self
+        
+        
     }
     
+    
+    
+    //Outlets connected to the login and signup UI buttons
     @IBAction func login(_ sender: Any) {
         login()
     }
@@ -60,6 +70,11 @@ class LoginViewController: UIViewController {
     
     func signup() {
         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
     
 }

@@ -8,6 +8,75 @@
          location = "container:"
          name = "Images">
          <FileRef
+            location = "group:../../pin blue.png">
+         </FileRef>
+         <FileRef
+            location = "group:check icon.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../pin blue.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../../Downloads/cancel icon.png">
+         </FileRef>
+         <FileRef
+            location = "group:logo20x20.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../../Downloads/notifications bell.png">
+         </FileRef>
+         <FileRef
+            location = "group:messages notif.png">
+         </FileRef>
+         <FileRef
+            location = "group:logoFull.png">
+         </FileRef>
+         <FileRef
+            location = "group:logo60x60.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../../Downloads/notifications bell.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../logo.png">
+         </FileRef>
+         <FileRef
+            location = "group:logo40x40.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../../Downloads/cancel icon.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../logo.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../../Downloads/addImage.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../../Downloads/options.png">
+         </FileRef>
+         <FileRef
+            location = "group:gears white.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../../Downloads/message.png">
+         </FileRef>
+         <FileRef
+            location = "group:plus white.png">
+         </FileRef>
+         <FileRef
+            location = "group:plus blue.png">
+         </FileRef>
+         <FileRef
+            location = "group:/Users/daltonteague/Documents/IOS Projects/Circle Chat/city-image.jpg">
+         </FileRef>
+         <FileRef
+            location = "group:plus.png">
+         </FileRef>
+         <FileRef
+            location = "group:/Users/daltonteague/Documents/IOS Projects/Circle Chat/circles grid.jpg">
+         </FileRef>
+         <FileRef
             location = "group:Circle Chat/Images/edit profile.png">
          </FileRef>
          <FileRef
@@ -15,6 +84,18 @@
          </FileRef>
          <FileRef
             location = "group:Circle Chat/Images/login.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../../Downloads/addImage.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../../Downloads/selected.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../../Downloads/options.png">
+         </FileRef>
+         <FileRef
+            location = "group:../../../Downloads/message.png">
          </FileRef>
          <FileRef
             location = "group:Circle Chat/Images/map.png">
@@ -36,13 +117,13 @@
          location = "container:"
          name = "Pin Icons">
          <FileRef
+            location = "group:radius.png">
+         </FileRef>
+         <FileRef
             location = "group:select black.png">
          </FileRef>
          <FileRef
             location = "group:select blue.png">
-         </FileRef>
-         <FileRef
-            location = "group:radius.png">
          </FileRef>
          <FileRef
             location = "group:select red.png">
@@ -72,10 +153,13 @@
             location = "group:pin purple.png">
          </FileRef>
          <FileRef
-            location = "group:pin red.png">
+            location = "group:pin yellow.png">
          </FileRef>
          <FileRef
-            location = "group:pin yellow.png">
+            location = "group:../../pin blue.png">
+         </FileRef>
+         <FileRef
+            location = "group:pin red.png">
          </FileRef>
          <FileRef
             location = "group:../../pin blue.png">
@@ -85,16 +169,16 @@
          location = "group:../../pin blue.png">
       </FileRef>
       <FileRef
-         location = "group:check icon.png">
-      </FileRef>
-      <FileRef
          location = "group:../../../Downloads/cancel icon.png">
       </FileRef>
       <FileRef
          location = "group:../../../Downloads/notifications bell.png">
       </FileRef>
       <FileRef
-         location = "group:messages notif.png">
+         location = "group:selected.png">
+      </FileRef>
+      <FileRef
+         location = "group:../../logo.png">
       </FileRef>
       <FileRef
          location = "group:../../../Downloads/addImage.png">
@@ -109,25 +193,7 @@
          location = "group:../../../Downloads/options.png">
       </FileRef>
       <FileRef
-         location = "group:gears white.png">
-      </FileRef>
-      <FileRef
          location = "group:../../../Downloads/message.png">
-      </FileRef>
-      <FileRef
-         location = "group:plus white.png">
-      </FileRef>
-      <FileRef
-         location = "group:plus blue.png">
-      </FileRef>
-      <FileRef
-         location = "group:/Users/daltonteague/Documents/IOS Projects/Circle Chat/city-image.jpg">
-      </FileRef>
-      <FileRef
-         location = "group:plus.png">
-      </FileRef>
-      <FileRef
-         location = "group:/Users/daltonteague/Documents/IOS Projects/Circle Chat/circles grid.jpg">
       </FileRef>
       <Group
          location = "group:star_jedi"
